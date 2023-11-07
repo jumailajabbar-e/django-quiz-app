@@ -1,0 +1,16 @@
+<!-- templates/quiz/quiz_template.html -->
+<form method="post">
+    {% csrf_token %}
+    {% for question in questions %}
+        <h3>{{ question.question_text }}</h3>
+        <ul>
+            {% for choice in question.choice_set.all %}
+                <li>
+                    <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}">
+                    {{ choice.choice_text }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+    <input type="submit" value="Submit">
+</form>
